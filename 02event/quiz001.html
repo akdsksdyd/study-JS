@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <select id="sel">
+
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+
+    </select>
+
+    <input type="text" id="in">
+    
+    <input type="text" onchange="input();">
+
+    <div id="db">db클릭이벤트</div>
+
+    <script>
+
+        var sel = document.getElementById("sel"); //기본
+        sel.onchange = function(){
+            console.log('셀렉체인지');
+        }
+
+        function input(){ //인라인
+            console.log('인풋체인지');
+        }
+
+        var db = document.getElementById("db"); //표준
+        db.addEventListener("dblclick", function(){
+            console.log('더블클릭됨');
+        })
+
+        var btn2 = document.getElementById("in");
+        btn2.onchange = function(){
+            console.log(this.value);
+        }
+
+    </script>
+
+</body>
+</html>
