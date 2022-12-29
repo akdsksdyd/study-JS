@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        var data = [
+            {id: 'aaa123', title: 'aaa', content: '...'},
+            {id: 'bbb123', title: 'bbb', content: '...'},
+            {id: 'ccc123', title: 'ccc', content: '...'}
+        ];
+        // JS의 값 들을 다른 프로그램으로 보낼 때, 절대로 그냥 보낼 수 없다.
+        // 이렇게 보내면 그냥 객체라는 것만 나옴.
+        // console.log(typeof data);
+        // console.log(data);
+
+        //JS객체를 JSON문자열로 형변환을 한 후 보내줘야함
+        var str = JSON.stringify(data);
+        console.log(str);
+
+        //JSON문자열을 JS객체로 형변환
+        var obj = JSON.parse(str);
+        console.log(obj);
+
+        //단, 문자열을 객체로 변경할 때는 엄격한 규칙이 있다.
+        //키와 값을 반드시 ""으로 따로 묶어주고, 중괄호를 ''로 묶어준다.
+        var result = JSON.parse('{"id": "aaa123"}');
+        console.log(result);
+
+    </script>
+    
+</body>
+</html>
