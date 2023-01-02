@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        input{width: 150px;}
+        .list button{margin-left: 5px;}
+        .deleteAll{margin-top: 30px;}
+    </style>
+
+</head>
+<body>
+    
+    <h2>
+        step1 <br>
+        input은 지우는게 아니라 display를 제어 <br>
+        할 일 목록 만들기
+    </h2>
+
+    <div>
+        <h3 id="myInfo"></h3>
+    </div>
+
+    <div id="name_box">
+        <input type="text" class="nickname" placeholder="이름을 입력하세요">
+        <button class="name_commit">확인</button>
+    </div>
+
+    <div id="work_box">
+        <input type="text" class="work" placeholder="할 일을 입력하세요">
+        <button class="work_commit">추가</button>
+    </div>
+
+    <button class="deleteAll">전제 삭제</button>
+
+    <ul class="list">
+
+    </ul>
+
+    <script>
+
+        var name_box = document.getElementById("name_box");
+        var name_commit = document.querySelector(".name_commit");
+        var nickname = document.querySelector(".nickname");
+        var myInfo = document.getElementById("myInfo");
+
+        name_commit.onclick = function(){
+            myInfo.innerHTML = nickname.value + '님 안녕하세요';
+            name_box.style.display = 'none';
+        }
+
+        var work_box = document.getElementById("work_box");
+        var work = document.querySelector(".work");
+        var work_commit = document.querySelector(".work_commit");
+        var list = document.querySelector(".list");
+        var deleteAll = document.querySelector(".deleteAll");
+
+        work_commit.onclick = function(){
+            //버튼생성
+            var li = document.createElement("li");
+            list.appendChild(li);
+            li.innerHTML = work.value;
+            work.value = '';
+            var work_delete = document.createElement("button");
+            li.appendChild(work_delete);
+            work_delete.innerHTML = '삭제';
+            var btnUp = document.createElement("button");
+            li.appendChild(btnUp);
+            btnUp.innerHTML = '위로▲';
+            var btnDown = document.createElement("button");
+            li.appendChild(btnDown);
+            btnDown.innerHTML = '아래로▼';
+
+            //할 일 목록 삭제
+            work_delete.ondblclick = function(){
+                work_delete.parentElement.remove();
+            }
+            //선택 행 위로 올리기
+            btnUp.onclick = function(){
+                var current = btnUp.parentElement;
+                var previous = current.previousElementSibling;
+                if(previous === null){
+                    alert('올라 갈 곳이 없습니다.')
+                    return;
+                }
+                list.insertBefore(current, previous);
+            }
+            //선택 행 밑으로 내리기
+            btnDown.onclick = function(){
+                var current = btnDown.parentElement;
+                var next = current.nextElementSibling;
+                if(next === null){
+                    alert('내려 갈 곳이 없습니다.')
+                    return;
+                }
+                list.insertBefore(next, current);
+            }
+            //할 일 전부 삭제
+            deleteAll.onclick = function(){
+                var liList = document.querySelectorAll(".list li");
+                if(confirm('정말 전부 삭제 하시겠습니까?') === false){
+                    return;
+                }else{
+                    for(var i = 0; i < liList.length; i++){
+                        liList[i].remove();
+                    }
+                }
+            }
+        }
+
+    </script>
+
+</body>
+</html>
