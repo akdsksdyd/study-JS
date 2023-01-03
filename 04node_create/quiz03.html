@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+        .content {
+            overflow: hidden;
+            border: 1px solid #777;
+        }
+        .content,
+        .content .left,
+        .content .right {
+            width: 50%;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 5px;
+        }
+        .content .right,
+        .content .left {
+            float:left;
+        }
+        .left .inner,
+        .right .inner {
+            border: 1px solid #777;
+            height: 300px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        
+    </style>
+
+</head>
+<body>
+    
+    <header>
+        <div class="center">
+            <h2>토글형태 활용하기</h2>
+            <button id="btn1" class="dark">어둡게보기</button>
+            <button id="btn2" class="profile">이름보기</button>
+
+            <!--추가-->
+            <hr>
+        </div>
+    </header>
+    
+    <section>
+        <div class="content">
+            <div class="left">
+                <div class="inner">
+                    <img src="img/프로필.jpg" style="display: none;" class="profileImg">
+                    <img src="img/1.jpg" class="nameImg">
+
+                </div>
+            </div>
+            <div class="right">
+                <div class="inner">
+					<p class="info" style="display:none;">멍멍이<br>2세<br>자기소개<br>똥꾸 멍!멍!<br> </p>
+                    <p class="dict">생명이 싹트는 싱그러운 계절 봄.</p>
+                    <a href="https://namu.wiki/w/%EB%B4%84">위키백과</a>
+                </div>
+            </div>            
+        </div>
+    </section>
+
+    <script>
+        var body = document.querySelector("body");
+        //body태그는 document의 내포 되어 있기 때문에
+        //var body = document.body; 로 가져 올 수 있다.
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var inner = document.querySelector(".right .inner");
+        var h2 = document.querySelector(".center h2");
+
+        btn1.onclick = function(){
+            if(btn1.classList.contains("dark")){
+                body.style.backgroundColor = "black";
+                btn1.innerHTML = "밝게보기";
+                inner.style.color = "white";
+                h2.style.color = "white";
+            }else{
+                body.style.backgroundColor = "white";
+                btn1.innerHTML = "어둡게보기";
+                inner.style.color = "black";
+                h2.style.color = "black";
+            }
+            btn1.classList.toggle("dark");
+        }
+        var nameImg = document.querySelector(".nameImg");
+        var profileImg = document.querySelector(".profileImg");
+        var info = document.querySelector(".info");
+        var dict = document.querySelector(".dict");
+        var address = document.querySelector(".right .inner a");
+
+        btn2.onclick = function(){
+            if(btn2.classList.contains("profile")){
+                nameImg.style.display = "none";
+                profileImg.style.display = "inline-block";
+                btn2.innerHTML = "내용보기";
+                dict.style.display = "none";
+                info.style.display = "inline-block";
+                address.href = "https://namu.wiki/w/%EA%B3%A8%EB%93%A0%20%EB%A6%AC%ED%8A%B8%EB%A6%AC%EB%B2%84";
+            }else{
+                nameImg.style.display = "inline-block";
+                profileImg.style.display = "none";
+                btn2.innerHTML = "이름보기";
+                dict.style.display = "inline-block";
+                info.style.display = "none";
+                address.href = "https://namu.wiki/w/%EB%B4%84";
+            }
+            btn2.classList.toggle("profile");
+        }
+
+    </script>
+
+</body>
+</html>
