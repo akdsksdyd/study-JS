@@ -23,7 +23,22 @@
 
         .active {
             display: block;
+            animation: fadeIn 1s ease-in-out; /* 애니메이션 적용 문구 */
         }
+
+        /* 애니메이션 */
+        @keyframes fadeIn{
+            from{
+                opacity: 0;
+                background-color: aqua;
+                margin-left: -100px;
+            }to{
+                opacity: 1;
+                background-color: aquamarine;
+                margin-left: 0;
+            }
+        }
+
     </style>
 
 </head>
