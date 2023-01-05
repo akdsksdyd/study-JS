@@ -18,13 +18,34 @@
 
 <body>
 
-
-    <img src="img/1.jpg" id="img">
-    <img src="img/2.jpg" id="img">
-    <img src="img/3.jpg" id="img">
-    <img src="img/4.jpg" id="img">
+    <div class="box">
+        <img src="img/1.jpg" id="img">
+        <img src="img/2.jpg" id="img">
+        <img src="img/3.jpg" id="img">
+        <img src="img/4.jpg" id="img">
+    </div>
 
     <button id="btn">기록</button>
+
+    <script>
+
+        var box = document.querySelector(".box");
+        box.onclick = function(){
+            if(event.target.tagName !== "IMG")return;
+            for(var i = 0; i < 2; i++){
+
+                if(i == 1){
+                    i = 0;
+                }
+            }
+        }
+
+        var btn = document.getElementById("btn");
+        btn.onclick = function(){
+            window.location.href = "quiz001.html"
+        }
+
+    </script>
 
 </body>
 
