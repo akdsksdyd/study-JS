@@ -11,14 +11,13 @@
         img {
             width: 20%;
         }
-        
     </style>
 
 </head>
 
 <body>
 
-    <div class="box"></div>
+    <div class="box">
         <img src="img/1.jpg" id="img">
         <img src="img/2.jpg" id="img">
         <img src="img/3.jpg" id="img">
@@ -30,18 +29,17 @@
     <script>
 
         var box = document.querySelector(".box");
-        box.onclick = function(){
-            if(event.target.tagName !== "IMG")return;
-            for(var i = 0; i < 2; i++){
-
-                if(i == 1){
-                    i = 0;
-                }
+        box.onclick = function () {
+            if (event.target.tagName !== "IMG"){
+                return;
+            }else{
+                localStorage.setItem
             }
-        }
 
+
+        }
         var btn = document.getElementById("btn");
-        btn.onclick = function(){
+        btn.onclick = function () {
             window.location.href = "quiz001.html"
         }
 
