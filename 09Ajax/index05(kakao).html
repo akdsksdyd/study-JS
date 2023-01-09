@@ -31,6 +31,31 @@
                 redirectUri: 'http://127.0.0.1:5501/09Ajax/index05(kakao).html',
             });
         }
+
+        //3.인가코드 받아오기
+        var URLSearch = new URLSearchParams(location.search);
+        // console.log(URLSearch.get('code'));
+        if (URLSearch.get('code') !== null) {
+            ajax();
+        }
+
+        //4.토큰 발급요청(post방식, 폼형식)
+        function ajax() {
+
+            var data = {
+                
+            }
+
+            fetch('https://kauth.kakao.com/oauth/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+
+        }
+
     </script>
 
 </body>
