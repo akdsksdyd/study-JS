@@ -40,20 +40,82 @@
         }
 
         //4.토큰 발급요청(post방식, 폼형식)
+        //JSON형식의 POST요청
+        // function ajax() {
+
+        //     var data = {
+        //         grant_type : "authorization_code",
+        //         client_id : "80ea871c0f5a0fc2a82d69ddd8b45c12",
+        //         redirect_uri : "http://127.0.0.1:5501/09Ajax/index05(kakao).html",
+        //         code : URLSearch.get('code')
+        //     }
+
+        //     fetch('https://kauth.kakao.com/oauth/token', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(data)
+        //     })
+        //     .then(function(res){
+        //         console.log(res);
+        //     })
+
+        // }
+
         function ajax() {
 
-            var data = {
-                
-            }
+            //Form형식의 POST요청
+            //formData객체이용 or 문자열
+            var uri = "http://127.0.0.1:5501/09Ajax/index05(kakao).html";
+            var data = "grant_type=authorization_code" +
+                "&client_id=80ea871c0f5a0fc2a82d69ddd8b45c12" +
+                "&redirect_uri=" + uri +
+                "&code=" + URLSearch.get("code");
 
-            fetch('https://kauth.kakao.com/oauth/token', {
-                method: 'POST',
+            fetch("https://kauth.kakao.com/oauth/token", {
+                method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
                 },
-                body: JSON.stringify(data)
+                body: data
             })
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+                    //sessionStorage or cookie등 으로 저장.
+                    sessionStorage.setItem("access_token", data.access_token);
 
+                    //카카오 API함수
+                    Kakao.Auth.setAccessToken(data.access_token);
+                    //토큰을 발급받고, 사용자 정보 받아오기 호출
+                    requestUserInfo();
+                })
+        }
+
+        //5.사용자 정보 받아오기
+        function requestUserInfo() {
+            //카카오 API내장함수 호출
+            Kakao.API.request({
+                url: '/v2/user/me',
+            })
+                .then(function (res) {
+                    console.log(res);
+                    console.log(res.kakao_account.email);
+                    console.log(res.kakao_account.profile.nickname);
+                    console.log(res.kakao_account.profile.profile_image_url);
+                    //이 정보를 가지고, 우리 데이터베이스에서 조회 or 로그인 하는 작업으로 연결
+                    //처리하는 페이지로 보낸다.
+                    sessionStorage.setItem("info", JSON.stringify({
+                        id: res.kakao_account.email, 
+                        nick: res.kakao_account.profile.nickname}));
+                    location.href = "index06.html"
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
 
     </script>
